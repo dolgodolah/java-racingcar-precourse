@@ -19,6 +19,6 @@ class ProgressBarTest {
         }
 
         assertThat(progressBar.toString()).isEqualTo(expected.toString());
-        assertThat(progressBar.getProgressBar().length()).isEqualTo(forwardCount);
+        assertThat(progressBar.get().length()).isEqualTo(forwardCount);
     }
 }
