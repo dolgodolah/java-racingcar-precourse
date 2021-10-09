@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class CarsTest {
 
-    private static final CarName CAR_NAME = new CarName("one");
+    private static final String CAR_NAME = "name";
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4, 5})

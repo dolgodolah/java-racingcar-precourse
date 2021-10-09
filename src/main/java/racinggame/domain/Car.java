@@ -5,8 +5,8 @@ public class Car {
     private CarName carName;
     private ProgressBar progressBar;
 
-    public Car(CarName name) {
-        this.carName = name;
+    public Car(String name) {
+        this.carName = new CarName(name);
         this.progressBar = new ProgressBar();
     }
 

@@ -26,8 +26,7 @@ public class RacingManager {
         cars = new Cars();
         String[] input = Input.inputCars();
         for (int i = 0; i < input.length; i++) {
-            CarName name = new CarName(input[i]);
-            Car car = new Car(name);
+            Car car = new Car(input[i]);
             cars.add(car);
         }
     }

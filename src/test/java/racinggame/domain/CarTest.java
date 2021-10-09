@@ -9,26 +9,20 @@ import static org.assertj.core.api.Assertions.*;
 
 public class CarTest {
 
-    private static final String NAME = "name";
-    private CarName carName;
-
-    @BeforeEach
-    void setUp() {
-        carName = new CarName(NAME);
-    }
+    private static final String CAR_NAME = "name";
 
     @Test
     void Car_초기생성() {
-        Car car = new Car(carName);
+        Car car = new Car(CAR_NAME);
 
-        assertThat(car.getCarName()).isEqualTo(NAME);
+        assertThat(car.getCarName()).isEqualTo(CAR_NAME);
         assertThat(car.getProgressBar().length()).isEqualTo(0);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4, 5})
     void Car_전진(int forwardCount) {
-        Car car = new Car(carName);
+        Car car = new Car(CAR_NAME);
         StringBuilder progressBar = new StringBuilder();
         for (int i = 0; i < forwardCount; i++) {
             car.forward();
@@ -42,13 +36,13 @@ public class CarTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4, 5})
     void Car_전진_상태_출력(int forwardCount) {
-        Car car = new Car(carName);
+        Car car = new Car(CAR_NAME);
         StringBuilder progressBar = new StringBuilder();
         for (int i = 0; i< forwardCount; i++) {
             car.forward();
             progressBar.append("-");
         }
 
-        assertThat(car.toString()).isEqualTo(carName.getName() + ":" + progressBar.toString());
+        assertThat(car.toString()).isEqualTo(CAR_NAME + " : " + progressBar.toString());
     }
 }
