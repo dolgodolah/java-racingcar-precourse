@@ -4,9 +4,9 @@ import nextstep.utils.Console;
 
 public class Input {
 
-    public static String inputCarName() {
+    public static String[] inputCars() {
         Output.printRequestCarNameMessage();
-        return Console.readLine();
+        return Console.readLine().split(",");
     }
 
     public static String inputTryCount() {

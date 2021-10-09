@@ -24,6 +24,6 @@ public class Car {
 
     @Override
     public String toString() {
-        return carName.getName() + ":" + progressBar.toString();
+        return carName.getName() + " : " + progressBar.toString();
     }
 }
