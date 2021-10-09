@@ -14,7 +14,7 @@ public class ProgressBar {
         this.progressBar.append(BAR);
     }
 
-    public StringBuilder getProgressBar() {
+    public StringBuilder get() {
         return progressBar;
     }
 
