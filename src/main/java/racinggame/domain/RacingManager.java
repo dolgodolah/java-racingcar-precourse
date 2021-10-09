@@ -1,12 +1,14 @@
 package racinggame.domain;
 
 import racinggame.exception.CustomException;
+import racinggame.exception.ErrorCode;
 import racinggame.ui.Input;
 import racinggame.ui.Output;
 
 public class RacingManager {
 
     private Cars cars;
+    private TryCount tryCount;
     private Status status;
 
     enum Status {
@@ -16,6 +18,7 @@ public class RacingManager {
     public void initRacing() {
         try {
             initCars();
+            inputTryCount();
             ready();
         } catch (CustomException e) {
             Output.printErrorMessage(e.getMessage());
@@ -29,6 +32,11 @@ public class RacingManager {
             Car car = new Car(input[i]);
             cars.add(car);
         }
+    }
+
+    private void inputTryCount() {
+        String input = Input.inputTryCount();
+        tryCount = TryCount.of(input);
     }
 
     public boolean isReady() {
