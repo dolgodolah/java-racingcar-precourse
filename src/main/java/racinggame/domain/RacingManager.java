@@ -14,16 +14,20 @@ public class RacingManager {
     private Status status;
 
     enum Status {
-        READY
+        INIT_CARS, INPUT_TRY_COUNT, READY
+    }
+
+    public RacingManager() {
+        this.status = Status.INIT_CARS;
     }
 
     public void initRacing() {
-        try {
-            inputCars();
+        while (isInitCarsStatus()) {
+            initCars();
+        }
+
+        while (isInputTryCountStatus()) {
             inputTryCount();
-            ready();
-        } catch (CustomException e) {
-            Output.printErrorMessage(e.getMessage());
         }
     }
 
@@ -41,6 +45,14 @@ public class RacingManager {
         Output.printResult(result.toString());
     }
 
+    private void initCars() {
+        try {
+            inputCars();
+        } catch (CustomException e) {
+            Output.printErrorMessage(e.getMessage());
+        }
+    }
+
     private void inputCars() {
         cars = new Cars();
         String[] input = Input.inputCars();
@@ -52,18 +64,35 @@ public class RacingManager {
             Car car = new Car(input[i]);
             cars.add(car);
         }
+
+        completeInitCars();
     }
 
     private void inputTryCount() {
-        String input = Input.inputTryCount();
-        tryCount = TryCount.of(input);
+        try {
+            String input = Input.inputTryCount();
+            tryCount = TryCount.of(input);
+            completeInputTryCount();
+        } catch (CustomException e) {
+            Output.printErrorMessage(e.getMessage());
+        }
+
     }
 
-    public boolean isReady() {
-        return this.status == Status.READY;
+    private boolean isInitCarsStatus() {
+        return this.status == Status.INIT_CARS;
     }
 
-    private void ready() {
+    private boolean isInputTryCountStatus() {
+        return this.status == Status.INPUT_TRY_COUNT;
+    }
+
+    private void completeInitCars() {
+        this.status = Status.INPUT_TRY_COUNT;
+    }
+
+    private void completeInputTryCount() {
         this.status = Status.READY;
     }
+
 }
