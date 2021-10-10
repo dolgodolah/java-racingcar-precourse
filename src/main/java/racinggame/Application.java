@@ -9,5 +9,7 @@ public class Application {
         while (!racingManager.isReady()) {
             racingManager.initRacing();
         }
+        racingManager.startRacing();
+        racingManager.viewResult();
     }
 }

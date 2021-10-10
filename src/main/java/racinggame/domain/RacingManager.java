@@ -5,6 +5,8 @@ import racinggame.exception.ErrorCode;
 import racinggame.ui.Input;
 import racinggame.ui.Output;
 
+import java.util.List;
+
 public class RacingManager {
 
     private Cars cars;
@@ -23,6 +25,20 @@ public class RacingManager {
         } catch (CustomException e) {
             Output.printErrorMessage(e.getMessage());
         }
+    }
+
+    public void startRacing() {
+        Output.printStartMessage();
+        for (int i = 0; i < tryCount.get(); i++) {
+            cars.race();
+            cars.viewStatus();
+        }
+    }
+
+    public void viewResult() {
+        List<Car> winners = cars.getWinners();
+        Result result = new Result(winners);
+        Output.printResult(result.toString());
     }
 
     private void initCars() {

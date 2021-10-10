@@ -1,6 +1,7 @@
 package racinggame.domain;
 
 import nextstep.utils.Randoms;
+import racinggame.ui.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,11 @@ public class Cars {
             cars.get(i).forwardOrStop(move);
         }
     }
+
+    public void viewStatus() {
+        Output.printCarsStatus(cars);
+    }
+
     public List<Car> getWinners() {
         List<Car> winners = new ArrayList<>();
         String maxProgressBar = getMaxProgressBar();
