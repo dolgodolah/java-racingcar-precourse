@@ -27,4 +27,31 @@ public class Cars {
             cars.get(i).forwardOrStop(move);
         }
     }
+    public List<Car> getWinners() {
+        List<Car> winners = new ArrayList<>();
+        String maxProgressBar = getMaxProgressBar();
+        for (int i = 0; i < cars.size(); i++) {
+            addIfMaxProgressBar(winners, maxProgressBar, cars.get(i));
+        }
+
+        return winners;
+    }
+
+    private void addIfMaxProgressBar(List<Car> winners, String maxProgressBar, Car car) {
+        if (car.getProgressBar().equals(maxProgressBar))
+            winners.add(car);
+    }
+
+    private String getMaxProgressBar() {
+        String maxProgressBar = "";
+        for (int i = 0; i < cars.size(); i++) {
+            String progressBar = cars.get(i).getProgressBar();
+            maxProgressBar = compare(maxProgressBar, progressBar);
+        }
+        return maxProgressBar;
+    }
+
+    private String compare(String max, String value) {
+        return value.length() > max.length() ? value : max;
+    }
 }
