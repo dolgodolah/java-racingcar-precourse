@@ -19,7 +19,7 @@ public class RacingManager {
 
     public void initRacing() {
         try {
-            initCars();
+            inputCars();
             inputTryCount();
             ready();
         } catch (CustomException e) {
@@ -41,9 +41,13 @@ public class RacingManager {
         Output.printResult(result.toString());
     }
 
-    private void initCars() {
+    private void inputCars() {
         cars = new Cars();
         String[] input = Input.inputCars();
+        if (input.length < 1) {
+            throw new CustomException(ErrorCode.EMPTY_NAME);
+        }
+
         for (int i = 0; i < input.length; i++) {
             Car car = new Car(input[i]);
             cars.add(car);

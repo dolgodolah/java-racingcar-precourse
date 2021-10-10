@@ -15,8 +15,12 @@ public class CarName {
     }
 
     private void validateNameLength(String name) {
-        if (name.length() > MAX_LENGTH) {
+        if (name.trim().length() > MAX_LENGTH) {
             throw new CustomException(ErrorCode.INVALID_NAME_LENGTH);
+        }
+
+        if (name.trim().isEmpty()) {
+            throw new CustomException(ErrorCode.EMPTY_NAME);
         }
     }
 
