@@ -1,6 +1,5 @@
 package racinggame.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,6 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 public class CarTest {
 
     private static final String CAR_NAME = "name";
+    private static final String BAR = "-";
 
     @Test
     void Car_초기생성() {
@@ -20,29 +20,27 @@ public class CarTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 3, 4, 5})
-    void Car_전진(int forwardCount) {
+    @ValueSource(ints = {4, 5, 6, 7, 8, 9})
+    void Car_4이상이면_전진(int value) {
         Car car = new Car(CAR_NAME);
-        StringBuilder progressBar = new StringBuilder();
-        for (int i = 0; i < forwardCount; i++) {
-            car.forward();
-            progressBar.append("-");
-        }
+        Move move = new Move(value);
+        car.forwardOrStop(move);
 
-        assertThat(car.getProgressBar()).isEqualTo(progressBar.toString());
-        assertThat(car.getProgressBar().length()).isEqualTo(forwardCount);
+        assertThat(car.getProgressBar()).isEqualTo(BAR);
+        assertThat(car.getProgressBar().length()).isEqualTo(1);
+        assertThat(car.toString()).isEqualTo(CAR_NAME + " : " + BAR);
+
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 3, 4, 5})
-    void Car_전진_상태_출력(int forwardCount) {
+    @ValueSource(ints = {0, 1, 2, 3})
+    void Car_3이하이면_멈춤(int value) {
         Car car = new Car(CAR_NAME);
-        StringBuilder progressBar = new StringBuilder();
-        for (int i = 0; i< forwardCount; i++) {
-            car.forward();
-            progressBar.append("-");
-        }
+        Move move = new Move(value);
+        car.forwardOrStop(move);
 
-        assertThat(car.toString()).isEqualTo(CAR_NAME + " : " + progressBar.toString());
+        assertThat(car.getProgressBar()).isEqualTo("");
+        assertThat(car.getProgressBar().length()).isEqualTo(0);
     }
+
 }

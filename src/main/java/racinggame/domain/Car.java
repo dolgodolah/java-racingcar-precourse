@@ -10,7 +10,13 @@ public class Car {
         this.progressBar = new ProgressBar();
     }
 
-    public void forward() {
+    public void forwardOrStop(Move move) {
+        if (move.isForward()) {
+            forward();
+        }
+    }
+
+    private void forward() {
         this.progressBar.forward();
     }
 
@@ -24,6 +30,6 @@ public class Car {
 
     @Override
     public String toString() {
-        return carName.getName() + " : " + progressBar.toString();
+        return getCarName() + " : " + getProgressBar();
     }
 }
